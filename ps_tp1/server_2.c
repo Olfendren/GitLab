@@ -6,9 +6,16 @@
 #include <signal.h>
 
 /*Question 1.2 Deuxième partie, avec la commande kill -s INT (code) le message d'arrêt de mon handler s'affiche*/
+
 /*Question 1.2 Troisième partie, avec la commande kill -9 (code) le message d'arrêt de mon handler ne s'affiche pas, 
 je ne pense pas que ce soit possible de faire tourner l'handler post-kill de cette façon (kill -9). 
-Sigaction ne peut recevoir de signal SIGKILL ou SIGSTOP comme argument donc on ne peut pas forcer la lecture de l'handler*/
+Sigaction ne peut recevoir de signal SIGKILL ou SIGSTOP comme argument donc on ne peut pas forcer la lecture de l'handler.
+Si on kill le process père, le terminal disparait*/
+
+/*Question 1.2 Dernière Partie, après avoir retiré le changement de running, la fonction ne s'arrête pas après un Ctrl + C, ni après un kill.
+La commande kill -9 réussit à arrêter le programme*/
+
+/*Question 1.3 Message de fin, le message est affiché pour l'arrêt par Ctrl+C et Kill -s INT mais pas pour kill -9*/
 
 
 /*Initialisation du booléen*/
@@ -23,8 +30,12 @@ void stop_handler(int sig)
     printf("%i ", sig);
     printf("\n");
     printf("La boucle a été arrêtée");
+    running=0;
+}
 
-    running = 0;
+void exit_message()
+{
+    printf("I'll be back \n");
 }
 
 int main()
@@ -55,6 +66,9 @@ int main()
         sleep(1);
         printf("\n");
     }
+    
+   
+    atexit(exit_message);
 
     printf("Fin de la boucle \n");
     return EXIT_SUCCESS;
