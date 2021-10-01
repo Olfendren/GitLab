@@ -6,6 +6,9 @@
 #include <signal.h>
 
 /*Question 1.2 Deuxième partie, avec la commande kill -s INT (code) le message d'arrêt de mon handler s'affiche*/
+/*Question 1.2 Troisième partie, avec la commande kill -9 (code) le message d'arrêt de mon handler ne s'affiche pas, 
+je ne pense pas que ce soit possible de faire tourner l'handler post-kill de cette façon (kill -9). 
+Sigaction ne peut recevoir de signal SIGKILL ou SIGSTOP comme argument donc on ne peut pas forcer la lecture de l'handler*/
 
 
 /*Initialisation du booléen*/
