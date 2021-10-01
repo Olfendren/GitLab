@@ -5,6 +5,9 @@
 #include <stdbool.h>
 #include <signal.h>
 
+/*Question 1.2 Deuxième partie, avec la commande kill -s INT (code) le message d'arrêt de mon handler s'affiche*/
+
+
 /*Initialisation du booléen*/
 bool running = 1;
 
