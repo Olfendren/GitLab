@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-
+#include <functional>
 
 
 
@@ -69,6 +69,11 @@ void sort_tab_2(std::vector<double>&tab,bool (*comp)(double, double))
     std::sort(tab.begin(),tab.end(),*comp);
 }
 
+void sort_tab_3(std::vector<double>&tab,std::function<bool(double,double)>comp)
+{
+    std::sort(tab.begin(),tab.end(),comp);
+}
+
 void test_11()
 {
     std::cout<<"***Test 11*** \n";
@@ -102,9 +107,20 @@ void test_14()
     print_tab(tab);
 
 }
+void test_15()
+{
+    std::vector< double > tab( 10 );
+    random_tab(tab);
+    print_tab(tab);
+    sort_tab_3(tab, [](int a, int b) { a=std::abs(a); b=std::abs(b);return a<b; });
+    print_tab(tab);
+    sort_tab_3(tab, [](int a, int b) { a=std::abs(a); b=std::abs(b);return a>b; });    
+    print_tab(tab);
+
+}
 
 int main()
 {
    std::srand(time(0));
-   test_14();
+   test_15();
 }
