@@ -41,9 +41,33 @@ void sort_tab_1(std::vector<double> &tab)
             }
     }
 }
+bool less(double a, double b)
+{
+    if (a<b)
+    {
+        return true;
+    }
+    else 
+    {
+        return false; 
+    }
+}
+bool greater(double a, double b)
+{
+    if (a>b)
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
+}
 
-
-
+void sort_tab_2(std::vector<double>&tab,bool (*comp)(double, double))
+{
+    std::sort(tab.begin(),tab.end(),*comp);
+}
 
 void test_11()
 {
@@ -58,20 +82,29 @@ void test_12()
     random_tab(tab);
     print_tab(tab);
 }
-std::vector<double> test_13()
+
+void test_13()
 {
 std::vector< double > tab( 10 );
 random_tab(tab);
 print_tab(tab);
 sort_tab_1(tab);
 print_tab(tab);
-
-return tab;
 }
+void test_14()
+{
+    std::vector< double > tab( 10 );
+    random_tab(tab);
+    print_tab(tab);
+    sort_tab_2(tab,less);
+    print_tab(tab);
+    sort_tab_2(tab,greater);
+    print_tab(tab);
 
+}
 
 int main()
 {
    std::srand(time(0));
-   test_13();
+   test_14();
 }
