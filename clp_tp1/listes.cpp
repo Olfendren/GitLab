@@ -79,9 +79,21 @@ void test_23()
     print_list(res2);
 
 }
+void test_24()
+{
+    std::forward_list< int > list{ random_list(10) };
+    print_list(list);
+    int coeff=rand()%5+1;
+    std::cout<<"Valeur du coefficient aléatoire: "<<coeff<<"\n";
+
+    auto res=map_iter(list,[coeff](int a) {return a*coeff; });
+    print_list(res);
+    auto res2=filter_iter(res,[](int a){if (a % 2==0){return true;}else{return false;}});
+    print_list(res2);
+}
 
 int main ()
 {
     std::srand(time(0));
-    test_23();
+    test_24();
 }
