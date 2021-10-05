@@ -27,20 +27,33 @@ void print_list(const std::forward_list<int> &list)
     std::cout<<") \n";
 }
 
-std::forward_list< int > map_iter(const std::forward_list<int> &list, std::function<int( int )>sig)
+std::forward_list< int > map_iter(const std::forward_list<int> &list, std::function<int( int )>sign)
 {
     std::forward_list<int>res;
 
     for (auto const& i : list) 
     {
-        res.push_front(sig(i));
+        res.push_front(sign(i));
 
     }  
 return res;
 }
 
+std::forward_list< int > filter_iter(const std::forward_list<int> &list, std::function<bool( int )>sign)
+{
+    std::forward_list<int>res2;
 
+    for (auto const& i : list) 
+    {
+        if (sign(i))
+        {
+            res2.push_front(i);
+        }
 
+    }  
+return res2;
+
+}
 
 void test_21()
 {
@@ -56,9 +69,19 @@ void test_22()
     print_list(res);
 
 }
+void test_23()
+{
+    std::forward_list< int > list{ random_list(10) };
+    print_list(list);
+    auto res=map_iter(list,[](int a) {return a*3; });
+    print_list(res);
+    auto res2=filter_iter(res,[](int a){if (a % 2==0){return true;}else{return false;}});
+    print_list(res2);
+
+}
 
 int main ()
 {
     std::srand(time(0));
-    test_22();
+    test_23();
 }
