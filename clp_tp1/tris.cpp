@@ -4,45 +4,74 @@
 
 
 
- double print_tab(std::vector<double> v)
+ void print_tab( const std::vector<double> &tab)
 {
-    std::cout<<"v=[";
-    for (int n :v)
+    std::cout<<"tab=[";
+    for (int n :tab)
     {
         std::cout<<n<<" ";
     }
     std::cout<<"] \n";
-    return 0;
 }
 
-std::vector<double> random_tab(std::vector<double> v)
+void random_tab(std::vector<double> &tab)
 {
-    for (int i = 0; i < v.size(); i++)
+    for (int i = 0; i < tab.size(); i++)
     {         
-    v[i] = rand()%21 + (-10);         
+    tab[i] = rand()%21 + (-10);         
     }
-    return v;
 }
 
-double test_11()
+void sort_tab_1(std::vector<double> &tab)
+{
+    for (int i = 0; i <= tab.size()-2; i++)
+    {         
+        double mini=i;
+    
+        for (int j=i+1;j<=tab.size();j++)
+            {
+                if (tab[j]<tab[mini])
+                {
+                    mini=j;
+                }
+            }
+        if (mini!=i)
+            {
+                std::swap(tab[i],tab[mini]);
+            }
+    }
+}
+
+
+
+
+void test_11()
 {
     std::cout<<"***Test 11*** \n";
     const std::vector< double > tab{ 1, -2, 3, -4, 5, -6 };
     print_tab(tab);
-
-    return 0;
 }
 
-double test_12()
+void test_12()
 {
     std::vector< double > tab( 10 );
-    std::vector< double > tabr= random_tab(tab);
-    print_tab(tabr);
-    return 0;
+    random_tab(tab);
+    print_tab(tab);
 }
+std::vector<double> test_13()
+{
+std::vector< double > tab( 10 );
+random_tab(tab);
+print_tab(tab);
+sort_tab_1(tab);
+print_tab(tab);
+
+return tab;
+}
+
 
 int main()
 {
    std::srand(time(0));
-   test_12();
+   test_13();
 }
